@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+*.cover
+.hypothesis/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.mo
+*.pot
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Node / React
+ui/node_modules/
+ui/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.local
+
+# Vite
+ui/.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Oracle runtime data
+context/actors/*.json
+context/clients/*.json
+investigations/
+!investigations/.gitkeep
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Playwright
+ui/test-results/
+ui/playwright-report/
+ui/blob-report/
+ui/playwright/.cache/
