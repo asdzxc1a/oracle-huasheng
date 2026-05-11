@@ -1,0 +1,30 @@
+{
+  "actor_name": "Florence Pugh",
+  "known_for": "Midsommar, Little Women, Oppenheimer, Don't Worry Darling",
+  "career_stage": "peak",
+  "filmography_highlights": [
+    {"title": "Oppenheimer", "year": 2023, "role": "Jean Tatlock", "significance": "A-list ensemble — dramatic intensity in limited screen time"},
+    {"title": "Don't Worry Darling", "year": 2022, "role": "Alice Chambers", "significance": "First lead carrying a mid-budget thriller"},
+    {"title": "Midsommar", "year": 2019, "role": "Dani Ardor", "significance": "Breakthrough — sustained emotional breakdown across full runtime"},
+    {"title": "Little Women", "year": 2019, "role": "Amy March", "significance": "Oscar-nominated — transformed most-disliked character into audience favorite"},
+    {"title": "Fighting with My Family", "year": 2019, "role": "Saraya 'Paige' Bevis", "significance": "Physical transformation + comedy + drama in one role"}
+  ],
+  "career_timeline": [
+    {"year": 2014, "event": "Independent film debut (The Falling)", "significance": "Early critical notice"},
+    {"year": 2019, "event": "Midsommar + Little Women double release", "significance": "Breakthrough year — horror prestige + Oscar bait simultaneously"},
+    {"year": 2020, "event": "First Oscar nomination", "significance": "Industry validation at age 24"},
+    {"year": 2022, "event": "Don't Worry Darling press tour controversy", "significance": "First exposure to tabloid-level media scrutiny"},
+    {"year": 2023, "event": "Oppenheimer + Dune 2 ensemble roles", "significance": "Franchise integration while maintaining indie credibility"}
+  ],
+  "videos": [
+    {"title": "Florence Pugh — Midsommar Press Conference (Comic-Con 2019)", "url": "https://www.youtube.com/results?search_query=florence+pugh+midsommar+comic+con+2019", "date": "2019-07-20", "duration_seconds": 2100, "context": "Genre-festival Q&A for horror breakout", "source_type": "press_conference", "access_level": "MANAGED", "platform": "youtube", "signal_density": "High", "why_relevant": "Shows how she handles fan questions about emotionally demanding roles."},
+    {"title": "Florence Pugh on Off Menu Podcast", "url": "https://www.youtube.com/results?search_query=florence+pugh+off+menu+podcast", "date": "2023-09-10", "duration_seconds": 3600, "context": "Long-form conversation about food, family, and career", "source_type": "podcast", "access_level": "MANAGED", "platform": "youtube", "signal_density": "Very High", "why_relevant": "Relaxed setting reveals baseline personality without PR filtering."},
+    {"title": "Little Women — Behind the Scenes with Greta Gerwig", "url": "https://www.youtube.com/results?search_query=little+women+behind+the+scenes+florence+pugh+greta+gerwig", "date": "2019-12-15", "duration_seconds": 950, "context": "Sony production featurette — on-set behavior", "source_type": "bts", "access_level": "MANAGED", "platform": "youtube", "signal_density": "Moderate", "why_relevant": "Studio BTS is partially staged but shows director-actor dynamic."},
+    {"title": "Florence Pugh — The Tonight Show (Oppenheimer promo)", "url": "https://www.youtube.com/results?search_query=florence+pugh+tonight+show+oppenheimer", "date": "2023-07-18", "duration_seconds": 480, "context": "Late-night promotional appearance", "source_type": "late_night", "access_level": "SCRIPTED", "platform": "youtube", "signal_density": "Low", "why_relevant": "Baseline comparison only."},
+    {"title": "Florence Pugh Cooks with Vogue (At Home)", "url": "https://www.youtube.com/results?search_query=florence+pugh+cooks+vogue+at+home", "date": "2023-04-05", "duration_seconds": 720, "context": "Home environment — unscripted domestic activity", "source_type": "interview", "access_level": "RAW", "platform": "youtube", "signal_density": "High", "why_relevant": "Domestic setting reveals baseline affect and comfort with vulnerability."}
+  ],
+  "known_contradictions": [
+    {"claim_a": "Pugh is comfortable with media attention and handles controversy with grace", "claim_b": "In long-form interviews, she describes anxiety about public perception and describes shutting down during the Don't Worry Darling press cycle", "sources": "Late-night appearances vs. Off Menu podcast"},
+    {"claim_a": "Her physical transformation for roles shows dedication and range", "claim_b": "Every physical change has been within her existing body type — no fundamental transformation has been attempted", "sources": "Filmography analysis"}
+  ]
+}

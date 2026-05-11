@@ -1,0 +1,30 @@
+{
+  "actor_name": "Barry Keoghan",
+  "known_for": "The Banshees of Inisherin, The Killing of a Sacred Deer, Saltburn, Dunkirk",
+  "career_stage": "establishing",
+  "filmography_highlights": [
+    {"title": "Saltburn", "year": 2023, "role": "Oliver Quick", "significance": "First lead role — psychologically complex antihero"},
+    {"title": "The Banshees of Inisherin", "year": 2022, "role": "Dominic Kearney", "significance": "Oscar-nominated supporting — heartbreaking vulnerability"},
+    {"title": "The Killing of a Sacred Deer", "year": 2017, "role": "Martin Lang", "significance": "Breakthrough — controlled menace in Yorgos Lanthimos film"},
+    {"title": "Dunkirk", "year": 2017, "role": "George Mills", "significance": "Christopher Nolan blockbuster — first major exposure"},
+    {"title": "Chernobyl", "year": 2019, "role": "Pavel", "significance": "HBO miniseries — dramatic credibility in ensemble"}
+  ],
+  "career_timeline": [
+    {"year": 2011, "event": "First film role (Between the Canals)", "significance": "Dublin street-casting origin"},
+    {"year": 2017, "event": "Dunkirk + Sacred Deer double release", "significance": "Blockbuster exposure + auteur credibility simultaneously"},
+    {"year": 2022, "event": "Banshees of Inisherin", "significance": "Oscar nomination — industry validation"},
+    {"year": 2023, "event": "Saltburn lead role", "significance": "First film where he carries the narrative"},
+    {"year": 2024, "event": "Gladiator II supporting role", "significance": "Franchise integration test"}
+  ],
+  "videos": [
+    {"title": "Barry Keoghan — The Banshees of Inisherin Press Conference (Venice 2022)", "url": "https://www.youtube.com/results?search_query=barry+keoghan+banshees+inisherin+venice+2022", "date": "2022-09-05", "duration_seconds": 1600, "context": "Festival Q&A with Martin McDonagh and Colin Farrell", "source_type": "press_conference", "access_level": "MANAGED", "platform": "youtube", "signal_density": "High", "why_relevant": "Shows comfort with ensemble press dynamics and Irish media."},
+    {"title": "Barry Keoghan on The Late Late Show (RTÉ)", "url": "https://www.youtube.com/results?search_query=barry+keoghan+late+late+show+ rte", "date": "2023-11-17", "duration_seconds": 2400, "context": "Irish national TV — long-form interview in home context", "source_type": "interview", "access_level": "MANAGED", "platform": "youtube", "signal_density": "Very High", "why_relevant": "Home-country interview often reveals more than international press."},
+    {"title": "Saltburn — Behind the Scenes with Emerald Fennell", "url": "https://www.youtube.com/results?search_query=saltburn+behind+the+scenes+barry+keoghan", "date": "2023-11-10", "duration_seconds": 880, "context": "Production featurette — on-set behavior during provocative scenes", "source_type": "bts", "access_level": "MANAGED", "platform": "youtube", "signal_density": "Moderate", "why_relevant": "Shows professionalism during boundary-pushing content."},
+    {"title": "Barry Keoghan — Variety Actors on Actors", "url": "https://www.youtube.com/results?search_query=barry+keoghan+variety+actors+on+actors", "date": "2023-12-01", "duration_seconds": 2700, "context": "Peer-to-peer conversation with another actor", "source_type": "interview", "access_level": "MANAGED", "platform": "youtube", "signal_density": "High", "why_relevant": "Peer conversation removes journalist filter — reveals how actors talk to each other."},
+    {"title": "Barry Keoghan — Jimmy Kimmel Live (Saltburn promo)", "url": "https://www.youtube.com/results?search_query=barry+keoghan+jimmy+kimmel+saltburn", "date": "2023-11-15", "duration_seconds": 420, "context": "Late-night promotional appearance", "source_type": "late_night", "access_level": "SCRIPTED", "platform": "youtube", "signal_density": "Low", "why_relevant": "Baseline comparison only."}
+  ],
+  "known_contradictions": [
+    {"claim_a": "Keoghan is naturally charismatic and comfortable in his own skin", "claim_b": "In Irish interviews, he discusses childhood insecurity and how acting was an escape from social anxiety", "sources": "Late Late Show vs. Kimmel appearance"},
+    {"claim_a": "He specializes in menacing, unhinged characters", "claim_b": "Banshees performance revealed heartbreaking vulnerability — his range may be wider than the 'creepy' typecasting suggests", "sources": "Sacred Deer vs. Banshees character analysis"}
+  ]
+}
