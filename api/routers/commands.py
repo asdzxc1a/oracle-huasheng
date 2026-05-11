@@ -172,13 +172,17 @@ def command_compare(
     job_id = f"{inv_id}-compare-{uuid4().hex[:8]}"
     _job_store[job_id] = {"status": "running"}
 
-    # TODO: Implement comparable-mapper agent
-    # For now, return a stub
-    _job_store[job_id] = {
-        "status": "completed",
-        "success": True,
-        "message": "Comparable mapper not yet implemented. Use /assess for individual actors.",
-    }
+    background_tasks.add_task(
+        _run_command_task,
+        str(base_path),
+        inv_id,
+        "comparable_mapper",
+        {
+            "actors": req.actors,
+            "question": req.question,
+        },
+        job_id,
+    )
 
     return CommandResponse(
         investigation_id=inv_id,
