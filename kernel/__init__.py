@@ -13,9 +13,11 @@ from .manifest import (
 )
 from .context_store import ContextStore
 from .agent_runner import AgentRunner
+from .skill_loader import SkillLoader
+from .skill_registry import SkillRegistry
 from .human_hook import pause_for_human, display_brief_summary
+from .llm_client import LLMClient, LLMResponse
 from .intelligence import (
-    LLMClient,
     Claim,
     Contradiction,
     AdversarialFinding,
@@ -33,6 +35,21 @@ from .intelligence import (
     TIER_CAP_BY_ACCESS,
     TIER_DEFINITIONS,
     ANTI_PATTERNS,
+)
+from .formatters import (
+    format_contradiction_map,
+    format_adversarial_findings,
+    format_tier_marking,
+    generate_uncertainty_map,
+    compile_brief,
+    generate_synthesis,
+    format_anti_patterns,
+    extract_thesis,
+    summarize_evidence,
+    count_tiers,
+    format_video_catalog_md,
+    format_facts_md,
+    build_harvester_json,
 )
 from .video_pipeline import (
     ProcessedVideo,
@@ -57,10 +74,14 @@ __all__ = [
     "manifest_path",
     "ContextStore",
     "AgentRunner",
+    "SkillLoader",
+    "SkillRegistry",
     "pause_for_human",
     "display_brief_summary",
-    # Intelligence layer
+    # LLM client
     "LLMClient",
+    "LLMResponse",
+    # Intelligence layer
     "Claim",
     "Contradiction",
     "AdversarialFinding",
@@ -78,6 +99,21 @@ __all__ = [
     "TIER_CAP_BY_ACCESS",
     "TIER_DEFINITIONS",
     "ANTI_PATTERNS",
+    # Formatters
+    "format_contradiction_map",
+    "format_adversarial_findings",
+    "format_tier_marking",
+    "generate_uncertainty_map",
+    "compile_brief",
+    "generate_synthesis",
+    "format_anti_patterns",
+    "extract_thesis",
+    "summarize_evidence",
+    "count_tiers",
+    # Harvester formatters
+    "format_video_catalog_md",
+    "format_facts_md",
+    "build_harvester_json",
     # Video pipeline
     "ProcessedVideo",
     "download_video",

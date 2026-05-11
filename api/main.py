@@ -22,7 +22,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
-from .routers import investigations, agents, files
+from .routers import investigations, agents, files, commands, skills
 
 # ── App initialization ───────────────────────────────────────────────────────
 
@@ -46,6 +46,8 @@ app.add_middleware(
 app.include_router(investigations.router, prefix="/api")
 app.include_router(agents.router, prefix="/api")
 app.include_router(files.router, prefix="/api")
+app.include_router(commands.router, prefix="/api")
+app.include_router(skills.router, prefix="/api")
 
 
 @app.get("/api/health")

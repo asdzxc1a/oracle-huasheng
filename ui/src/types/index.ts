@@ -43,3 +43,20 @@ export type PipelineStage =
   | "presence"
   | "proof"
   | "deployment";
+
+export interface Skill {
+  name: string;
+  description: string;
+  has_scripts: boolean;
+  has_references: boolean;
+  has_assets: boolean;
+}
+
+export interface CommandResult {
+  investigation_id: string;
+  actor: string;
+  question: string;
+  status: string;
+  agent: string;
+  job_id: string;
+}

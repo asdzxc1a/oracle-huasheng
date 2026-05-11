@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { Film, Search, User, Settings, Plus, ChevronRight } from "lucide-react";
+import { Film, Search, User, Settings, Plus, ChevronRight, BookOpen } from "lucide-react";
 import type { Investigation } from "../types";
 
 interface SidebarProps {
@@ -87,6 +87,17 @@ export function Sidebar({ investigations, onCreate }: SidebarProps) {
           >
             <User size={13} />
             Actors
+          </button>
+          <button
+            onClick={() => navigate("/skills")}
+            className={`w-full text-left px-2 py-1.5 rounded-sm text-xs mb-0.5 flex items-center gap-2 transition-colors duration-150 ${
+              isActive("/skills")
+                ? "bg-graphite text-gold border-l-2 border-gold"
+                : "text-mist hover:text-parchment hover:bg-graphite/50"
+            }`}
+          >
+            <BookOpen size={13} />
+            Skills
           </button>
         </div>
       </nav>

@@ -1,12 +1,15 @@
 import { Film, Plus, Activity } from "lucide-react";
 import { InvestigationCard } from "../components/InvestigationCard";
 import { CreateInvestigationModal } from "../components/CreateInvestigationModal";
+import { CommandBar } from "../components/CommandBar";
 import { useInvestigations, createInvestigation } from "../hooks/useInvestigations";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Dashboard() {
   const { investigations, loading, error, refresh } = useInvestigations();
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleCreate = async (actor: string, question: string, initialRead: string) => {
     await createInvestigation(actor, question, initialRead);
@@ -23,6 +26,11 @@ export function Dashboard() {
 
   return (
     <div className="h-full overflow-y-auto">
+      {/* Command Bar */}
+      <div className="px-8 pt-6 pb-2">
+        <CommandBar onInvestigationCreated={(id) => navigate(`/investigation/${id}`)} />
+      </div>
+
       {/* Header */}
       <div className="px-8 py-6 border-b border-slate">
         <div className="flex items-center justify-between">

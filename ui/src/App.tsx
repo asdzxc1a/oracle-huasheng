@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Sidebar } from "./components/Sidebar";
 import { Dashboard } from "./pages/Dashboard";
 import { InvestigationDetail } from "./pages/InvestigationDetail";
+import { SkillBrowser } from "./pages/SkillBrowser";
 import { useInvestigations } from "./hooks/useInvestigations";
 import { CreateInvestigationModal } from "./components/CreateInvestigationModal";
 import { createInvestigation } from "./hooks/useInvestigations";
@@ -35,6 +36,7 @@ function AppLayout() {
             element={<InvestigationDetail />}
           />
           <Route path="/actors" element={<Dashboard />} />
+          <Route path="/skills" element={<SkillBrowser />} />
         </Routes>
       </main>
 
