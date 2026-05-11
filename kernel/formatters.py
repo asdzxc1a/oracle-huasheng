@@ -297,7 +297,7 @@ def extract_thesis(executive_summary: str) -> str:
     lines = [l.strip() for l in executive_summary.splitlines() if l.strip()]
     for line in lines:
         if line.startswith("**Verdict:**") or line.startswith("Verdict:"):
-            return line.split(":", 1)[1].strip().rstrip(".!")
+            return line.split(":", 1)[1].strip().rstrip(".!").lstrip("* ")
         if len(line) > 30 and not line.startswith("#") and not line.startswith("-"):
             return line[:200]
     return "Actor presents mixed signal profile for this casting question."
