@@ -1,0 +1,30 @@
+{
+  "actor_name": "Zendaya",
+  "known_for": "Euphoria, Dune, Challengers, Spider-Man",
+  "career_stage": "peak",
+  "filmography_highlights": [
+    {"title": "Challengers", "year": 2024, "role": "Tashi Duncan", "significance": "First adult lead carrying a non-franchise film"},
+    {"title": "Dune: Part Two", "year": 2024, "role": "Chani", "significance": "Expanded role in blockbuster franchise"},
+    {"title": "Euphoria", "year": 2019, "role": "Rue Bennett", "significance": "Breakthrough dramatic role — Emmy winner"},
+    {"title": "Spider-Man: No Way Home", "year": 2021, "role": "MJ", "significance": "Mainstream franchise establishment"},
+    {"title": "Malcolm & Marie", "year": 2021, "role": "Marie", "significance": "Intimate two-hander during pandemic"}
+  ],
+  "career_timeline": [
+    {"year": 2010, "event": "Disney Channel debut (Shake It Up)", "significance": "Child performer beginnings"},
+    {"year": 2017, "event": "Spider-Man: Homecoming", "significance": "Mainstream film breakthrough"},
+    {"year": 2019, "event": "Euphoria Season 1", "significance": "Dramatic credibility established"},
+    {"year": 2020, "event": "First Emmy win", "significance": "Industry validation of dramatic range"},
+    {"year": 2024, "event": "Challengers + Dune 2", "significance": "Dual-track: indie lead + franchise co-lead"}
+  ],
+  "videos": [
+    {"title": "Zendaya — Cannes Film Festival Press Conference (Challengers)", "url": "https://www.youtube.com/results?search_query=zendaya+cannes+2024+challengers+press+conference", "date": "2024-05-15", "duration_seconds": 1843, "context": "Cannes Film Festival — Challengers press conference with Luca Guadagnino", "source_type": "press_conference", "access_level": "MANAGED", "platform": "youtube", "signal_density": "High", "why_relevant": "Shows how she handles press scrutiny for first adult-lead film."},
+    {"title": "Zendaya on Hot Ones", "url": "https://www.youtube.com/results?search_query=zendaya+hot+ones+interview", "date": "2023-11-02", "duration_seconds": 1680, "context": "Long-form interview under physical stress (spicy wings)", "source_type": "interview", "access_level": "MANAGED", "platform": "youtube", "signal_density": "Very High", "why_relevant": "Fatigue and physical stress reveal baseline personality."},
+    {"title": "Euphoria Season 2 Behind the Scenes — Zendaya as Rue", "url": "https://www.youtube.com/results?search_query=euphoria+season+2+behind+the+scenes+zendaya", "date": "2022-02-28", "duration_seconds": 1205, "context": "HBO production diary — on-set behavior", "source_type": "bts", "access_level": "RAW", "platform": "youtube", "signal_density": "Very High", "why_relevant": "RAW footage of working process."},
+    {"title": "Zendaya — The Tonight Show (Dune: Part Two promo)", "url": "https://www.youtube.com/results?search_query=zendaya+tonight+show+dune+2+2024", "date": "2024-02-20", "duration_seconds": 420, "context": "Late-night promotional appearance", "source_type": "late_night", "access_level": "SCRIPTED", "platform": "youtube", "signal_density": "Low", "why_relevant": "Baseline comparison only."},
+    {"title": "Zendaya at Venice Film Festival Red Carpet (unfiltered)", "url": "https://www.youtube.com/results?search_query=zendaya+venice+film+festival+red+carpet+raw", "date": "2023-09-01", "duration_seconds": 380, "context": "Fan-captured red carpet moments", "source_type": "social_media", "access_level": "RAW", "platform": "youtube", "signal_density": "Moderate", "why_relevant": "Unscripted public behavior."}
+  ],
+  "known_contradictions": [
+    {"claim_a": "Zendaya projects confidence and control in all public settings", "claim_b": "Behind-the-scenes footage shows her seeking reassurance from directors between takes", "sources": "Hot Ones interview vs. Euphoria BTS"},
+    {"claim_a": "She consistently chooses artistically ambitious roles", "claim_b": "Every post-Euphoria project has been franchise-backed or director-driven with built-in prestige safety", "sources": "Filmography analysis"}
+  ]
+}

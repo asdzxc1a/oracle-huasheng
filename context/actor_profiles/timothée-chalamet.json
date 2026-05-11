@@ -1,0 +1,28 @@
+{
+  "actor_name": "Timothée Chalamet",
+  "known_for": "Call Me By Your Name, Dune, Wonka, Beautiful Boy",
+  "career_stage": "peak",
+  "filmography_highlights": [
+    {"title": "Dune: Part Two", "year": 2024, "role": "Paul Atreides", "significance": "Blockbuster franchise lead"},
+    {"title": "Wonka", "year": 2023, "role": "Willy Wonka", "significance": "First family-friendly lead — commercial test"},
+    {"title": "Bones and All", "year": 2022, "role": "Lee", "significance": "Indie auteur collaboration with Luca Guadagnino"},
+    {"title": "Call Me By Your Name", "year": 2017, "role": "Elio Perlman", "significance": "Breakthrough — Oscar nomination"},
+    {"title": "Beautiful Boy", "year": 2018, "role": "Nic Sheff", "significance": "Dramatic range demonstration"}
+  ],
+  "career_timeline": [
+    {"year": 2017, "event": "Call Me By Your Name", "significance": "International breakthrough"},
+    {"year": 2018, "event": "Beautiful Boy", "significance": "Addiction drama proves range beyond romance"},
+    {"year": 2021, "event": "Dune", "significance": "Franchise lead — commercial viability confirmed"},
+    {"year": 2023, "event": "Wonka", "significance": "Solo carry — first test of box-office draw without ensemble"},
+    {"year": 2024, "event": "Dune: Part Two", "significance": "Franchise maturity — can he anchor a $200M film?"}
+  ],
+  "videos": [
+    {"title": "Timothée Chalamet — Dune 2 Press Conference (Mexico City)", "url": "https://www.youtube.com/results?search_query=timothee+chalamet+dune+2+press+conference+2024", "date": "2024-02-05", "duration_seconds": 1520, "context": "International press tour — bilingual responses", "source_type": "press_conference", "access_level": "MANAGED", "platform": "youtube", "signal_density": "High", "why_relevant": "Shows how he handles international press and repetitive questioning."},
+    {"title": "Timothée Chalamet on the WTF with Marc Maron Podcast", "url": "https://www.youtube.com/results?search_query=timothee+chalamet+marc+maron+podcast", "date": "2023-12-15", "duration_seconds": 5400, "context": "Long-form conversation about career and craft", "source_type": "podcast", "access_level": "MANAGED", "platform": "youtube", "signal_density": "Very High", "why_relevant": "Extended exposure reveals baseline personality."},
+    {"title": "Bones and All — Behind the Scenes with Luca Guadagnino", "url": "https://www.youtube.com/results?search_query=bones+and+all+behind+the+scenes+timothee", "date": "2022-11-20", "duration_seconds": 890, "context": "On-set behavior during indie production", "source_type": "bts", "access_level": "RAW", "platform": "youtube", "signal_density": "Very High", "why_relevant": "Indie BTS shows working process without studio infrastructure."},
+    {"title": "Timothée Chalamet — Saturday Night Live Monologue", "url": "https://www.youtube.com/results?search_query=timothee+chalamet+snl+monologue", "date": "2023-11-11", "duration_seconds": 310, "context": "SNL hosting — scripted comedic performance", "source_type": "late_night", "access_level": "SCRIPTED", "platform": "youtube", "signal_density": "Low", "why_relevant": "Shows comedic timing and live performance comfort."}
+  ],
+  "known_contradictions": [
+    {"claim_a": "Chalamet is comfortable with fame and media attention", "claim_b": "In long-form interviews, he expresses ambivalence about celebrity and describes anxiety in public spaces", "sources": "SNL appearances vs. Marc Maron podcast"}
+  ]
+}

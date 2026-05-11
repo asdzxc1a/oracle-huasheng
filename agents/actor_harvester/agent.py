@@ -191,79 +191,28 @@ def _generate_catalog_with_llm(actor: str, client_question: str, focus_areas: li
 
 
 def _generate_catalog_fallback(actor: str, client_question: str, focus_areas: list[str], max_videos: int) -> dict[str, Any]:
-    """Structured fallback when LLM is unavailable."""
+    """Structured fallback when LLM is unavailable. Loads known profiles from disk."""
     actor_lower = actor.lower().strip()
 
-    profiles = {
-        "zendaya": {
-            "known_for": "Euphoria, Dune, Challengers, Spider-Man",
-            "career_stage": "peak",
-            "films": [
-                {"title": "Challengers", "year": 2024, "role": "Tashi Duncan", "significance": "First adult lead carrying a non-franchise film"},
-                {"title": "Dune: Part Two", "year": 2024, "role": "Chani", "significance": "Expanded role in blockbuster franchise"},
-                {"title": "Euphoria", "year": 2019, "role": "Rue Bennett", "significance": "Breakthrough dramatic role — Emmy winner"},
-                {"title": "Spider-Man: No Way Home", "year": 2021, "role": "MJ", "significance": "Mainstream franchise establishment"},
-                {"title": "Malcolm & Marie", "year": 2021, "role": "Marie", "significance": "Intimate two-hander during pandemic"},
-            ],
-            "timeline": [
-                {"year": 2010, "event": "Disney Channel debut (Shake It Up)", "significance": "Child performer beginnings"},
-                {"year": 2017, "event": "Spider-Man: Homecoming", "significance": "Mainstream film breakthrough"},
-                {"year": 2019, "event": "Euphoria Season 1", "significance": "Dramatic credibility established"},
-                {"year": 2020, "event": "First Emmy win", "significance": "Industry validation of dramatic range"},
-                {"year": 2024, "event": "Challengers + Dune 2", "significance": "Dual-track: indie lead + franchise co-lead"},
-            ],
-            "videos": [
-                {"title": "Zendaya — Cannes Film Festival Press Conference (Challengers)", "url": "https://www.youtube.com/results?search_query=zendaya+cannes+2024+challengers+press+conference", "date": "2024-05-15", "duration_seconds": 1843, "context": "Cannes Film Festival — Challengers press conference with Luca Guadagnino", "source_type": "press_conference", "access_level": "MANAGED", "platform": "youtube", "signal_density": "High", "why_relevant": "Shows how she handles press scrutiny for first adult-lead film."},
-                {"title": "Zendaya on Hot Ones", "url": "https://www.youtube.com/results?search_query=zendaya+hot+ones+interview", "date": "2023-11-02", "duration_seconds": 1680, "context": "Long-form interview under physical stress (spicy wings)", "source_type": "interview", "access_level": "MANAGED", "platform": "youtube", "signal_density": "Very High", "why_relevant": "Fatigue and physical stress reveal baseline personality."},
-                {"title": "Euphoria Season 2 Behind the Scenes — Zendaya as Rue", "url": "https://www.youtube.com/results?search_query=euphoria+season+2+behind+the+scenes+zendaya", "date": "2022-02-28", "duration_seconds": 1205, "context": "HBO production diary — on-set behavior", "source_type": "bts", "access_level": "RAW", "platform": "youtube", "signal_density": "Very High", "why_relevant": "RAW footage of working process."},
-                {"title": "Zendaya — The Tonight Show (Dune: Part Two promo)", "url": "https://www.youtube.com/results?search_query=zendaya+tonight+show+dune+2+2024", "date": "2024-02-20", "duration_seconds": 420, "context": "Late-night promotional appearance", "source_type": "late_night", "access_level": "SCRIPTED", "platform": "youtube", "signal_density": "Low", "why_relevant": "Baseline comparison only."},
-                {"title": "Zendaya at Venice Film Festival Red Carpet (unfiltered)", "url": "https://www.youtube.com/results?search_query=zendaya+venice+film+festival+red+carpet+raw", "date": "2023-09-01", "duration_seconds": 380, "context": "Fan-captured red carpet moments", "source_type": "social_media", "access_level": "RAW", "platform": "youtube", "signal_density": "Moderate", "why_relevant": "Unscripted public behavior."},
-            ],
-            "contradictions": [
-                {"claim_a": "Zendaya projects confidence and control in all public settings", "claim_b": "Behind-the-scenes footage shows her seeking reassurance from directors between takes", "sources": "Hot Ones interview vs. Euphoria BTS"},
-                {"claim_a": "She consistently chooses artistically ambitious roles", "claim_b": "Every post-Euphoria project has been franchise-backed or director-driven with built-in prestige safety", "sources": "Filmography analysis"},
-            ],
-        },
-        "timothée chalamet": {
-            "known_for": "Call Me By Your Name, Dune, Wonka, Beautiful Boy",
-            "career_stage": "peak",
-            "films": [
-                {"title": "Dune: Part Two", "year": 2024, "role": "Paul Atreides", "significance": "Blockbuster franchise lead"},
-                {"title": "Wonka", "year": 2023, "role": "Willy Wonka", "significance": "First family-friendly lead — commercial test"},
-                {"title": "Bones and All", "year": 2022, "role": "Lee", "significance": "Indie auteur collaboration with Luca Guadagnino"},
-                {"title": "Call Me By Your Name", "year": 2017, "role": "Elio Perlman", "significance": "Breakthrough — Oscar nomination"},
-                {"title": "Beautiful Boy", "year": 2018, "role": "Nic Sheff", "significance": "Dramatic range demonstration"},
-            ],
-            "timeline": [
-                {"year": 2017, "event": "Call Me By Your Name", "significance": "International breakthrough"},
-                {"year": 2018, "event": "Beautiful Boy", "significance": "Addiction drama proves range beyond romance"},
-                {"year": 2021, "event": "Dune", "significance": "Franchise lead — commercial viability confirmed"},
-                {"year": 2023, "event": "Wonka", "significance": "Solo carry — first test of box-office draw without ensemble"},
-                {"year": 2024, "event": "Dune: Part Two", "significance": "Franchise maturity — can he anchor a $200M film?"},
-            ],
-            "videos": [
-                {"title": "Timothée Chalamet — Dune 2 Press Conference (Mexico City)", "url": "https://www.youtube.com/results?search_query=timothee+chalamet+dune+2+press+conference+2024", "date": "2024-02-05", "duration_seconds": 1520, "context": "International press tour — bilingual responses", "source_type": "press_conference", "access_level": "MANAGED", "platform": "youtube", "signal_density": "High", "why_relevant": "Shows how he handles international press and repetitive questioning."},
-                {"title": "Timothée Chalamet on the WTF with Marc Maron Podcast", "url": "https://www.youtube.com/results?search_query=timothee+chalamet+marc+maron+podcast", "date": "2023-12-15", "duration_seconds": 5400, "context": "Long-form conversation about career and craft", "source_type": "podcast", "access_level": "MANAGED", "platform": "youtube", "signal_density": "Very High", "why_relevant": "Extended exposure reveals baseline personality."},
-                {"title": "Bones and All — Behind the Scenes with Luca Guadagnino", "url": "https://www.youtube.com/results?search_query=bones+and+all+behind+the+scenes+timothee", "date": "2022-11-20", "duration_seconds": 890, "context": "On-set behavior during indie production", "source_type": "bts", "access_level": "RAW", "platform": "youtube", "signal_density": "Very High", "why_relevant": "Indie BTS shows working process without studio infrastructure."},
-                {"title": "Timothée Chalamet — Saturday Night Live Monologue", "url": "https://www.youtube.com/results?search_query=timothee+chalamet+snl+monologue", "date": "2023-11-11", "duration_seconds": 310, "context": "SNL hosting — scripted comedic performance", "source_type": "late_night", "access_level": "SCRIPTED", "platform": "youtube", "signal_density": "Low", "why_relevant": "Shows comedic timing and live performance comfort."},
-            ],
-            "contradictions": [
-                {"claim_a": "Chalamet is comfortable with fame and media attention", "claim_b": "In long-form interviews, he expresses ambivalence about celebrity and describes anxiety in public spaces", "sources": "SNL appearances vs. Marc Maron podcast"},
-            ],
-        },
-    }
+    # Try to load from context/actor_profiles/
+    profile_dir = Path(__file__).resolve().parents[2] / "context" / "actor_profiles"
+    slug = actor_lower.replace(" ", "-")
+    profile_file = profile_dir / f"{slug}.json"
 
-    profile = profiles.get(actor_lower, _build_generic_profile(actor))
-    profile["videos"] = profile.get("videos", [])[:max_videos]
-    return {
-        "actor_name": actor,
-        "known_for": profile.get("known_for", "Film and television work"),
-        "career_stage": profile.get("career_stage", "establishing"),
-        "videos": profile.get("videos", []),
-        "filmography_highlights": profile.get("films", []),
-        "career_timeline": profile.get("timeline", []),
-        "known_contradictions": profile.get("contradictions", []),
-    }
+    if profile_file.exists():
+        profile = json.loads(profile_file.read_text(encoding="utf-8"))
+        videos = profile.get("videos", [])[:max_videos]
+        return {
+            "actor_name": actor,
+            "known_for": profile.get("known_for", "Film and television work"),
+            "career_stage": profile.get("career_stage", "establishing"),
+            "videos": videos,
+            "filmography_highlights": profile.get("filmography_highlights", []),
+            "career_timeline": profile.get("career_timeline", []),
+            "known_contradictions": profile.get("known_contradictions", []),
+        }
+
+    return _build_generic_profile(actor)
 
 
 def _build_generic_profile(actor: str) -> dict[str, Any]:
