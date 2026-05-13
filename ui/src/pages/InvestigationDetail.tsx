@@ -9,6 +9,7 @@ import { ChatPanel } from "../components/ChatPanel";
 import { useInvestigation } from "../hooks/useInvestigation";
 import { useFile } from "../hooks/useFile";
 import { useRunAgent } from "../hooks/useRunAgent";
+import { JsonViewer } from "../components/JsonViewer";
 
 export function InvestigationDetail() {
   const { id } = useParams<{ id: string }>();
@@ -173,6 +174,10 @@ export function InvestigationDetail() {
               {selectedFile && fileContent !== null ? (
                 selectedFile.endsWith(".md") ? (
                   <BriefViewer content={fileContent} />
+                ) : selectedFile.endsWith(".json") ? (
+                  <div className="h-full overflow-y-auto px-6 py-6">
+                    <JsonViewer data={JSON.parse(fileContent || "{}")} />
+                  </div>
                 ) : (
                   <div className="h-full overflow-y-auto px-6 py-6">
                     <pre className="text-xs text-parchment font-mono whitespace-pre-wrap">

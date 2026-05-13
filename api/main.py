@@ -22,7 +22,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
-from .routers import investigations, agents, files, commands, skills
+from .routers import investigations, agents, files, commands, skills, wiki, knowledge
 
 # ── App initialization ───────────────────────────────────────────────────────
 
@@ -48,11 +48,68 @@ app.include_router(agents.router, prefix="/api")
 app.include_router(files.router, prefix="/api")
 app.include_router(commands.router, prefix="/api")
 app.include_router(skills.router, prefix="/api")
+app.include_router(wiki.router, prefix="/api")
+app.include_router(knowledge.router, prefix="/api")
 
 
 @app.get("/api/health")
 def health_check() -> dict[str, str]:
     return {"status": "ok", "service": "oracle-api"}
+
+
+@app.get("/api/status")
+def system_status() -> dict[str, Any]:
+    """Comprehensive system status — dependencies, agents, LLM."""
+    import shutil
+    import subprocess
+
+    from oracle.kernel.llm_client_v2 import LLMClientV2
+    from oracle.kernel.knowledge_graph import KnowledgeGraph
+
+    status: dict[str, Any] = {
+        "api": "ok",
+        "version": "0.2.0",
+    }
+
+    # LLM
+    llm = LLMClientV2()
+    status["llm"] = {
+        "available": llm.is_available(),
+        "provider": "gemini",
+        "text_model": llm.text_model,
+        "video_model": llm.video_model,
+    }
+
+    # External tools
+    status["tools"] = {
+        "yt_dlp": shutil.which("yt-dlp") is not None,
+        "ffmpeg": shutil.which("ffmpeg") is not None,
+        "ffprobe": shutil.which("ffprobe") is not None,
+    }
+
+    # ChromaDB
+    try:
+        kg = KnowledgeGraph()
+        status["knowledge_graph"] = {
+            "available": True,
+            "actors": len(kg.list_actors()),
+        }
+    except Exception as e:
+        status["knowledge_graph"] = {"available": False, "error": str(e)}
+
+    # Agents
+    try:
+        from oracle.kernel import AgentRunner
+        runner = AgentRunner(Path(__file__).resolve().parent.parent)
+        agents = runner.list_agents()
+        status["agents"] = {
+            "count": len(agents),
+            "names": [a["name"] for a in agents],
+        }
+    except Exception as e:
+        status["agents"] = {"count": 0, "error": str(e)}
+
+    return status
 
 
 # ── Static file serving ──────────────────────────────────────────────────────

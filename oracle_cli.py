@@ -69,6 +69,71 @@ def cmd_investigate(args: argparse.Namespace) -> None:
         else:
             print(f"   ✗ Video Analysis failed: {result.get('error', 'unknown')}")
 
+    if args.run_v2_pipeline:
+        print("\n▶ Running FULL V2 Pipeline (honest video + profiler)...")
+        runner = AgentRunner(BASE_PATH)
+        
+        # Step 1: Video Analyzer v2 (honest pipeline)
+        print("\n  [1/5] Video Analyzer v2 — real video download + Gemini analysis...")
+        result = runner.run_agent(
+            investigation_id=manifest["id"],
+            agent_name="video_analyzer_v2",
+            instructions={"max_videos": args.max_videos or 3},
+        )
+        if result["success"]:
+            print(f"   ✓ Video Analyzer v2 complete — {result['result'].get('videos_analyzed', 0)} videos, {result['result'].get('observations_count', 0)} observations")
+        else:
+            print(f"   ✗ Video Analyzer v2 failed: {result.get('error', 'unknown')}")
+        
+        # Step 2: Knowledge Sync
+        print("\n  [2/5] Knowledge Sync — building knowledge graph...")
+        result = runner.run_agent(
+            investigation_id=manifest["id"],
+            agent_name="knowledge_sync",
+            instructions={},
+        )
+        if result["success"]:
+            print(f"   ✓ Knowledge Sync complete — {result['result'].get('claims_stored', 0)} claims stored")
+        else:
+            print(f"   ✗ Knowledge Sync failed: {result.get('error', 'unknown')}")
+        
+        # Step 3: Wiki Sync
+        print("\n  [3/5] Wiki Sync — generating actor wiki...")
+        result = runner.run_agent(
+            investigation_id=manifest["id"],
+            agent_name="wiki_sync",
+            instructions={},
+        )
+        if result["success"]:
+            print(f"   ✓ Wiki Sync complete — {result['result'].get('wiki_path', 'N/A')}")
+        else:
+            print(f"   ✗ Wiki Sync failed: {result.get('error', 'unknown')}")
+        
+        # Step 4: Psychological Profiler
+        print("\n  [4/5] Psychological Profiler — deep behavioral analysis...")
+        result = runner.run_agent(
+            investigation_id=manifest["id"],
+            agent_name="psychological_profiler",
+            instructions={},
+        )
+        if result["success"]:
+            dims = result['result'].get('dimensions', {})
+            print(f"   ✓ Profiler complete — dimensions: {', '.join(f'{k}={v}' for k,v in dims.items())}")
+        else:
+            print(f"   ✗ Profiler failed: {result.get('error', 'unknown')}")
+        
+        # Step 5: Red Team Agent
+        print("\n  [5/5] Red Team — adversarial audit...")
+        result = runner.run_agent(
+            investigation_id=manifest["id"],
+            agent_name="red_team_agent",
+            instructions={},
+        )
+        if result["success"]:
+            print(f"   ✓ Red Team complete — {result['result'].get('challenges_count', 0)} challenges, score: {result['result'].get('adversarial_score', 0)}")
+        else:
+            print(f"   ✗ Red Team failed: {result.get('error', 'unknown')}")
+
     if args.pause:
         pause_for_human(
             base_path=BASE_PATH,
@@ -166,7 +231,9 @@ def main() -> None:
     p_inv.add_argument("--question", required=True, help="Client casting question")
     p_inv.add_argument("--read", default="", help="Human initial read/instinct")
     p_inv.add_argument("--run-harvester", action="store_true", help="Auto-run Actor Harvester")
-    p_inv.add_argument("--run-video", action="store_true", help="Auto-run Video Analysis")
+    p_inv.add_argument("--run-video", action="store_true", help="Auto-run Video Analysis (legacy)")
+    p_inv.add_argument("--run-v2-pipeline", action="store_true", help="Run full honest V2 pipeline")
+    p_inv.add_argument("--max-videos", type=int, default=3, help="Max videos to analyze in V2 pipeline")
     p_inv.add_argument("--focus", default="", help="Focus area for video analysis")
     p_inv.add_argument("--pause", action="store_true", help="Pause for human input after")
     p_inv.set_defaults(func=cmd_investigate)

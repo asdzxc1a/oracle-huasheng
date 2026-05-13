@@ -2,6 +2,7 @@ import { Film, Plus, Activity } from "lucide-react";
 import { InvestigationCard } from "../components/InvestigationCard";
 import { CreateInvestigationModal } from "../components/CreateInvestigationModal";
 import { CommandBar } from "../components/CommandBar";
+import { SystemStatus } from "../components/SystemStatus";
 import { useInvestigations, createInvestigation } from "../hooks/useInvestigations";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -52,8 +53,9 @@ export function Dashboard() {
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="px-8 py-4 grid grid-cols-3 gap-4 max-w-2xl">
+      {/* Stats + System Status */}
+      <div className="px-8 py-4 grid grid-cols-1 lg:grid-cols-4 gap-4">
+        <div className="lg:col-span-3 grid grid-cols-3 gap-4">
         <div className="bg-graphite border border-slate rounded-md p-4">
           <div className="flex items-center gap-2 mb-1">
             <Film size={14} className="text-gold" />
@@ -84,6 +86,10 @@ export function Dashboard() {
           <p className="text-2xl font-semibold text-parchment">
             {completedCount}
           </p>
+        </div>
+        </div>
+        <div className="lg:col-span-1">
+          <SystemStatus />
         </div>
       </div>
 

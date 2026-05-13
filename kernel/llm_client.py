@@ -142,9 +142,17 @@ class LLMClient:
         """Call Google Gemini via direct HTTP with rate-limit retry and pacing."""
         import time
 
-        # gemini-2.5-pro has 0 free-tier quota on most API keys.
-        # gemini-2.5-flash is the free-tier workhorse (typically 20 req/min).
-        models = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-pro"]
+        # Priority: latest Gemini 3.1 preview → 3.0 preview → 2.5 stable → 2.0 fallback.
+        # gemini-3.1-pro-preview and gemini-3-pro-preview may have limited free-tier quota.
+        # gemini-3.1-flash-lite-preview and gemini-2.5-flash are the free-tier workhorses.
+        models = [
+            "gemini-3.1-pro-preview",
+            "gemini-3-pro-preview",
+            "gemini-3.1-flash-lite-preview",
+            "gemini-2.5-pro",
+            "gemini-2.5-flash",
+            "gemini-2.0-flash",
+        ]
         last_error = None
 
         # Track last call time to pace requests (stay under 20 req/min = 1 per 3.5s)
@@ -186,6 +194,11 @@ class LLMClient:
                         m = re.search(r"Please retry in\s+([\d\.]+)s", err_msg)
                         if m:
                             retry_seconds = int(float(m.group(1))) + 2
+                        # Cap wait to 10s so free-tier rate limits don't hang the app.
+                        # If the API wants us to wait longer, skip to the next model.
+                        if retry_seconds > 10:
+                            last_error = RuntimeError(f"{model_name} rate-limited ({retry_seconds}s wait). Skipping.")
+                            break
                         if attempt < 2:
                             time.sleep(retry_seconds)
                             continue

@@ -4,6 +4,8 @@ import { Sidebar } from "./components/Sidebar";
 import { Dashboard } from "./pages/Dashboard";
 import { InvestigationDetail } from "./pages/InvestigationDetail";
 import { SkillBrowser } from "./pages/SkillBrowser";
+import { WikiBrowser } from "./pages/WikiBrowser";
+import { KnowledgeBrowser } from "./pages/KnowledgeBrowser";
 import { useInvestigations } from "./hooks/useInvestigations";
 import { CreateInvestigationModal } from "./components/CreateInvestigationModal";
 import { createInvestigation } from "./hooks/useInvestigations";
@@ -36,6 +38,8 @@ function AppLayout() {
             element={<InvestigationDetail />}
           />
           <Route path="/actors" element={<Dashboard />} />
+          <Route path="/wiki" element={<WikiBrowser />} />
+          <Route path="/knowledge" element={<KnowledgeBrowser />} />
           <Route path="/skills" element={<SkillBrowser />} />
         </Routes>
       </main>

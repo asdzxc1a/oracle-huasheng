@@ -21,9 +21,13 @@ DEFAULT_PIPELINE: dict[str, dict[str, str]] = {
     "truth": {
         "actor_harvester": "not_started",
         "video_analysis": "not_started",
+        "video_analyzer_v2": "not_started",
         "voice_register": "not_started",
     },
     "readiness": {
+        "knowledge_sync": "not_started",
+        "psychological_profiler": "not_started",
+        "wiki_sync": "not_started",
         "dossier_builder": "not_started",
         "psychological_portrait": "not_started",
     },
@@ -32,6 +36,7 @@ DEFAULT_PIPELINE: dict[str, dict[str, str]] = {
         "pitch_deck": "not_started",
     },
     "proof": {
+        "red_team_agent": "not_started",
         "forensic_archive": "not_started",
         "cryptographic_vault": "not_started",
     },

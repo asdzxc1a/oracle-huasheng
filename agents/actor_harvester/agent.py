@@ -8,6 +8,7 @@ tier discipline. Composes source-evaluation and video-catalog skills.
 from __future__ import annotations
 
 import json
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -109,6 +110,9 @@ def run(investigation_id: str, instructions: dict[str, Any], context: dict[str, 
         catalog_data = _generate_catalog_fallback(actor, client_question, focus, max_videos)
 
     videos = catalog_data.get("videos", [])[:max_videos]
+
+    # Resolve fake search URLs to real video URLs using yt-dlp
+    videos = _resolve_video_urls(videos)
 
     # Write outputs using kernel formatters
     catalog_json = build_harvester_json(actor, investigation_id, videos, catalog_data)
@@ -213,6 +217,113 @@ def _generate_catalog_fallback(actor: str, client_question: str, focus_areas: li
         }
 
     return _build_generic_profile(actor)
+
+
+import re
+
+
+def _is_valid_youtube_id(video_id: str) -> bool:
+    """Check if a string is a valid YouTube video ID (11 chars, alphanumeric + -_)."""
+    return bool(re.match(r'^[a-zA-Z0-9_-]{11}$', video_id))
+
+
+def _extract_video_id(url: str) -> str | None:
+    """Extract YouTube video ID from URL."""
+    match = re.search(r'(?:v=|/)([a-zA-Z0-9_-]{11})(?:[&?]|$)', url)
+    return match.group(1) if match else None
+
+
+def _resolve_video_urls(videos: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Use yt-dlp to resolve search URLs to actual video URLs.
+    
+    Also validates existing watch URLs — LLMs sometimes hallucinate IDs that
+    pass regex but don't exist. yt-dlp verification catches these.
+    """
+    resolved = []
+    for video in videos:
+        url = video.get("url", "")
+        title = video.get("title", "")
+        
+        # If it looks like a watch URL, verify it exists with yt-dlp
+        if "youtube.com/watch?v=" in url or "youtu.be/" in url:
+            video_id = _extract_video_id(url)
+            if video_id and _is_valid_youtube_id(video_id):
+                # Validate the URL actually works
+                if _validate_youtube_url(url):
+                    resolved.append(video)
+                    continue
+                # Invalid/fake ID — fall through to search
+        
+        # If it's a search URL or missing, search yt-dlp
+        search_query = title
+        if not search_query or "results?search_query=" in url:
+            # Extract query from URL or use title
+            if "results?search_query=" in url:
+                from urllib.parse import unquote, urlparse, parse_qs
+                parsed = urlparse(url)
+                query = parse_qs(parsed.query).get("search_query", [""])[0]
+                search_query = unquote(query)
+            else:
+                search_query = video.get("title", "")
+        
+        real_url = _search_youtube(search_query)
+        if real_url:
+            video["url"] = real_url
+            resolved.append(video)
+        else:
+            # Keep original but mark as unresolved
+            video["url"] = url
+            video["_unresolved"] = True
+            resolved.append(video)
+    
+    return resolved
+
+
+def _validate_youtube_url(url: str) -> bool:
+    """Use yt-dlp to verify a YouTube URL is real and accessible."""
+    try:
+        result = subprocess.run(
+            [
+                "yt-dlp",
+                "--no-download",
+                "--quiet",
+                "--print", "%(id)s",
+                "--playlist-end", "1",
+                url,
+            ],
+            capture_output=True,
+            text=True,
+            timeout=15,
+        )
+        return result.returncode == 0 and len(result.stdout.strip()) == 11
+    except Exception:
+        return False
+
+
+def _search_youtube(query: str) -> str | None:
+    """Search YouTube via yt-dlp and return the first result URL."""
+    try:
+        result = subprocess.run(
+            [
+                "yt-dlp",
+                "--default-search", "ytsearch",
+                "--playlist-end", "1",
+                "--print", "%(webpage_url)s",
+                "--no-download",
+                "--quiet",
+                f"ytsearch1:{query}",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            url = result.stdout.strip().split("\n")[0]
+            if "youtube.com/watch?v=" in url or "youtu.be/" in url:
+                return url
+    except Exception:
+        pass
+    return None
 
 
 def _build_generic_profile(actor: str) -> dict[str, Any]:

@@ -9,13 +9,16 @@ This is the kernel's engine. It:
 5. Updates the manifest
 """
 
+import asyncio
 import importlib.util
+import inspect
 import sys
 from pathlib import Path
 from typing import Any, Protocol
 
 from . import manifest as manifest_mod
 from .context_store import ContextStore
+from .llm_client_v2 import LLMClientV2
 
 
 class AgentProtocol(Protocol):
@@ -126,10 +129,16 @@ class AgentRunner:
         # 3. Gather context
         investigation_context = self._gather_context(investigation_id, agent_name)
 
-        # 4. Execute
+        # 4. Execute (support both sync and async run())
         try:
-            result = mod.run(investigation_id, instructions, investigation_context)
+            run_fn = mod.run
+            if inspect.iscoroutinefunction(run_fn):
+                result = asyncio.run(run_fn(investigation_id, instructions, investigation_context))
+            else:
+                result = run_fn(investigation_id, instructions, investigation_context)
         except Exception as e:
+            import traceback
+            traceback.print_exc()
             manifest_mod.update_agent_status(self.base, investigation_id, agent_name, "failed")
             return {"success": False, "error": f"Agent execution failed: {e}"}
 
@@ -167,6 +176,9 @@ class AgentRunner:
         prompt_path = self.agents_dir / agent_name / "prompt.md"
         prompt = prompt_path.read_text(encoding="utf-8") if prompt_path.exists() else ""
 
+        # Create LLM client for agents
+        llm_client = LLMClientV2()
+
         return {
             "investigation_id": investigation_id,
             "manifest": m,
@@ -178,4 +190,5 @@ class AgentRunner:
             "references": references,
             "prompt": prompt,
             "context_store": self.context_store,
+            "llm_client": llm_client,
         }

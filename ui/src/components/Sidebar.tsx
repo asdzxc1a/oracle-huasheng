@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { Film, Search, User, Settings, Plus, ChevronRight, BookOpen } from "lucide-react";
+import { Film, Search, User, Settings, Plus, ChevronRight, BookOpen, BookOpenText, Network } from "lucide-react";
 import type { Investigation } from "../types";
 
 interface SidebarProps {
@@ -87,6 +87,28 @@ export function Sidebar({ investigations, onCreate }: SidebarProps) {
           >
             <User size={13} />
             Actors
+          </button>
+          <button
+            onClick={() => navigate("/wiki")}
+            className={`w-full text-left px-2 py-1.5 rounded-sm text-xs mb-0.5 flex items-center gap-2 transition-colors duration-150 ${
+              isActive("/wiki")
+                ? "bg-graphite text-gold border-l-2 border-gold"
+                : "text-mist hover:text-parchment hover:bg-graphite/50"
+            }`}
+          >
+            <BookOpenText size={13} />
+            Wiki
+          </button>
+          <button
+            onClick={() => navigate("/knowledge")}
+            className={`w-full text-left px-2 py-1.5 rounded-sm text-xs mb-0.5 flex items-center gap-2 transition-colors duration-150 ${
+              isActive("/knowledge")
+                ? "bg-graphite text-gold border-l-2 border-gold"
+                : "text-mist hover:text-parchment hover:bg-graphite/50"
+            }`}
+          >
+            <Network size={13} />
+            Knowledge
           </button>
           <button
             onClick={() => navigate("/skills")}
